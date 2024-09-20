@@ -27,8 +27,7 @@ def load_street_data():
 
 # Carregar os dados
 street_data = load_street_data()
-street_data = street_data.drop(columns=["CRIME_ID"])
-street_data = street_data.drop(columns=["CONTEXT"])
+street_data = street_data.drop(columns=["CRIME_ID", "CONTEXT"])
 
 # Filtros na barra lateral
 crime_types = st.sidebar.multiselect("Select Crime Type", options=street_data["CRIME_TYPE"].unique())
@@ -43,14 +42,31 @@ if regions:
 if months:
     street_data = street_data[street_data["MONTH"].isin(months)]
 
-# Exibir a tabela paginada
-st.dataframe(street_data, height=300)
-
-# Verificar se as colunas 'LATITUDE' e 'LONGITUDE' existem
-if 'LATITUDE' in street_data.columns and 'LONGITUDE' in street_data.columns:
-    # Gráfico
-    fig = px.scatter_mapbox(street_data, lat="LATITUDE", lon="LONGITUDE", color="CRIME_TYPE", zoom=10)
+# Verificar se as colunas 'LATITUDE', 'LONGITUDE' e 'LOCATION' existem
+if 'LATITUDE' in street_data.columns and 'LONGITUDE' in street_data.columns and 'LOCATION' in street_data.columns:
+    # Alterar o rótulo para mostrar a coluna 'LOCATION' no tooltip usando hover_data
+    fig = px.scatter_mapbox(
+        street_data, 
+        lat="LATITUDE", 
+        lon="LONGITUDE", 
+        color="CRIME_TYPE", 
+        zoom=10, 
+        hover_data={"LATITUDE": False, "LONGITUDE": False, "LOCATION": True},  # Mostrar apenas LOCATION no hover
+        size_max=15  # Aumentar o tamanho dos pontos
+    )
     fig.update_layout(mapbox_style="open-street-map")
     st.plotly_chart(fig)
 else:
-    st.warning("As colunas 'LATITUDE' e 'LONGITUDE' não estão disponíveis no conjunto de dados.")
+    st.warning("As colunas 'LATITUDE', 'LONGITUDE' e 'LOCATION' não estão disponíveis no conjunto de dados.")
+
+# Paginação manual
+def paginate_data(df, page_size):
+    page_number = st.number_input("Page number", min_value=1, max_value=(len(df) // page_size) + 1, step=1)
+    start_idx = (page_number - 1) * page_size
+    end_idx = start_idx + page_size
+    return df.iloc[start_idx:end_idx]
+
+# Exibir a tabela abaixo do gráfico com paginação
+page_size = 10  # Tamanho da página
+paginated_data = paginate_data(street_data, page_size)
+st.dataframe(paginated_data, height=300)

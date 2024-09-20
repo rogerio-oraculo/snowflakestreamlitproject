@@ -54,21 +54,23 @@ if crime_types:
 if genders:
     combined_data = combined_data[combined_data["GENDER"].isin(genders)]
 
-# Mostrar os dados
-st.dataframe(combined_data)
-
 # Gráfico dos horários com mais crimes
 crime_time_fig = px.histogram(combined_data, x="TIME_OF_DAY", color="CRIME_TYPE", title="Crime Occurrences by Time of Day")
 st.plotly_chart(crime_time_fig)
 
-# Gráfico dos crimes mais frequentes por localização
-crime_location_fig = px.scatter_mapbox(
-    combined_data, lat="LATITUDE", lon="LONGITUDE", color="CRIME_TYPE", zoom=10,
-    title="Most Frequent Crimes by Location"
-)
-crime_location_fig.update_layout(mapbox_style="open-street-map")
-st.plotly_chart(crime_location_fig)
-
 # Gráfico combinado
 fig = px.scatter(combined_data, x="CRIME_TYPE", y="OUTCOME", color="GENDER", title="Relationship Between Crimes and Searches")
 st.plotly_chart(fig)
+
+# Função de paginação manual
+def paginate_data(df, page_size):
+    page_number = st.number_input("Page number", min_value=1, max_value=(len(df) // page_size) + 1, step=1)
+    start_idx = (page_number - 1) * page_size
+    end_idx = start_idx + page_size
+    return df.iloc[start_idx:end_idx]
+
+# Exibir a tabela paginada no final da página
+page_size = 10  # Tamanho da página
+paginated_data = paginate_data(combined_data, page_size)
+#st.write("### Paginated Data")
+st.dataframe(paginated_data, height=300)

@@ -11,5 +11,5 @@ pip3 install snowflake-connector-python
 python3 upload_to_snowflake.py --file incoming/2024-07/2024-07-city-of-london-street.csv --stage CRIMES_IN_LONDON_STAGE
 python3 upload_to_snowflake.py --file incoming/2024-07/2024-07-city-of-london-stop-and-search.csv --stage CRIMES_IN_LONDON_STAGE
 ````
-# Criar tabelas com base nos arquivos da Stage
+# Criar tabelas csom base nos arquivos da Stage
 
