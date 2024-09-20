@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.express as px
 import snowflake.connector
 
-st.title("Análisis de Stop and Search en Londres")
+st.title("Stop and Search Analysis in London")
 
 # Conectar com Snowflake usando o secrets.toml
 def get_snowflake_connection():
@@ -20,7 +20,7 @@ def get_snowflake_connection():
 @st.cache_data(ttl=600)
 def load_stop_and_search_data():
     conn = get_snowflake_connection()
-    query = """SELECT * FROM crimes_in_london_db.crimes_in_london_schema."table_stop_and_search" LIMIT 100;"""
+    query = """SELECT * FROM crimes_in_london_db.crimes_in_london_schema."table_stop_and_search";"""
     df = pd.read_sql(query, conn)
     conn.close()
     return df
@@ -28,7 +28,17 @@ def load_stop_and_search_data():
 # Carregar os dados
 stop_search_data = load_stop_and_search_data()
 
-# Mostrar os dados em um dataframe interativo
+# Filtros na barra lateral
+genders = st.sidebar.multiselect("Select Gender", options=stop_search_data["GENDER"].unique())
+ethnicities = st.sidebar.multiselect("Select Ethnicity", options=stop_search_data["OFFICER_DEFINED_ETHNICITY"].unique())
+
+# Aplicar os filtros
+if genders:
+    stop_search_data = stop_search_data[stop_search_data["GENDER"].isin(genders)]
+if ethnicities:
+    stop_search_data = stop_search_data[stop_search_data["OFFICER_DEFINED_ETHNICITY"].isin(ethnicities)]
+
+# Mostrar os dados
 st.dataframe(stop_search_data)
 
 # Gráfico
