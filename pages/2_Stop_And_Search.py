@@ -27,8 +27,6 @@ def load_stop_and_search_data():
 
 # Carregar os dados
 stop_search_data = load_stop_and_search_data()
-
-# Remover colunas indesejadas
 stop_search_data = stop_search_data.drop(columns=["PART_OF_A_POLICING_OPERATION", "POLICING_OPERATION"])
 
 # Filtros na barra lateral
@@ -53,6 +51,6 @@ def paginate_data(df, page_size):
     return df.iloc[start_idx:end_idx]
 
 # Exibir a tabela abaixo do gráfico com paginação
-page_size = 10  # Tamanho da página
+page_size = 10
 paginated_data = paginate_data(stop_search_data, page_size)
 st.dataframe(paginated_data, height=300)

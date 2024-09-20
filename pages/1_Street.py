@@ -44,15 +44,14 @@ if months:
 
 # Verificar se as colunas 'LATITUDE', 'LONGITUDE' e 'LOCATION' existem
 if 'LATITUDE' in street_data.columns and 'LONGITUDE' in street_data.columns and 'LOCATION' in street_data.columns:
-    # Alterar o rótulo para mostrar a coluna 'LOCATION' no tooltip usando hover_data
     fig = px.scatter_mapbox(
         street_data, 
         lat="LATITUDE", 
         lon="LONGITUDE", 
         color="CRIME_TYPE", 
         zoom=10, 
-        hover_data={"LATITUDE": False, "LONGITUDE": False, "LOCATION": True},  # Mostrar apenas LOCATION no hover
-        size_max=15  # Aumentar o tamanho dos pontos
+        hover_data={"LATITUDE": False, "LONGITUDE": False, "LOCATION": True},
+        size_max=15
     )
     fig.update_layout(mapbox_style="open-street-map")
     st.plotly_chart(fig)
@@ -67,6 +66,6 @@ def paginate_data(df, page_size):
     return df.iloc[start_idx:end_idx]
 
 # Exibir a tabela abaixo do gráfico com paginação
-page_size = 10  # Tamanho da página
+page_size = 10
 paginated_data = paginate_data(street_data, page_size)
 st.dataframe(paginated_data, height=300)
