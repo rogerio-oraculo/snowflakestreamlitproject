@@ -1,23 +1,18 @@
 import snowflake.connector
-import json
 import os
 import argparse
+import streamlit as st
 
-def load_connection_config():
-    """Carrega as credenciais de conexão do arquivo connection.json."""
-    with open('connection.json', 'r') as f:
-        return json.load(f)
-
-def create_snowflake_connection(config):
-    """Cria uma conexão com o Snowflake usando as credenciais."""
+def create_snowflake_connection():
+    """Cria uma conexão com o Snowflake usando as credenciais do secrets.toml."""
     return snowflake.connector.connect(
-        user=config['user'],
-        password=config['password'],
-        account=config['account'],
-        warehouse=config['warehouse'],
-        database=config['database'],
-        schema=config['schema'],
-        role=config['role']
+        user=st.secrets["snowflake"]["user"],
+        password=st.secrets["snowflake"]["password"],
+        account=st.secrets["snowflake"]["account"],
+        warehouse=st.secrets["snowflake"]["warehouse"],
+        database=st.secrets["snowflake"]["database"],
+        schema=st.secrets["snowflake"]["schema"],
+        role=st.secrets["snowflake"]["role"]
     )
 
 def upload_file_to_stage(conn, file_path, stage_name):
@@ -50,11 +45,8 @@ def main():
     
     args = parser.parse_args()
     
-    # Carrega as credenciais de conexão diretamente do connection.json
-    config = load_connection_config()
-    
     # Cria uma conexão com o Snowflake
-    conn = create_snowflake_connection(config)
+    conn = create_snowflake_connection()
     
     try:
         # Upload do arquivo para a stage

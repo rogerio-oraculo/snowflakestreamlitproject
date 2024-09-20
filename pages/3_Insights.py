@@ -1,16 +1,21 @@
 import streamlit as st
 import pandas as pd
 import snowflake.connector
-import json
 import plotly.express as px
 
 st.title("Insights Combinados - Street y Stop and Search")
 
-# Conectar con Snowflake
+# Conectar com Snowflake usando o secrets.toml
 def get_snowflake_connection():
-    with open('connection.json') as f:
-        connection_parameters = json.load(f)
-    return snowflake.connector.connect(**connection_parameters)
+    return snowflake.connector.connect(
+        account=st.secrets["snowflake"]["account"],
+        user=st.secrets["snowflake"]["user"],
+        password=st.secrets["snowflake"]["password"],
+        role=st.secrets["snowflake"]["role"],
+        warehouse=st.secrets["snowflake"]["warehouse"],
+        database=st.secrets["snowflake"]["database"],
+        schema=st.secrets["snowflake"]["schema"]
+    )
 
 @st.cache_data(ttl=600)
 def load_combined_data():
@@ -26,10 +31,10 @@ def load_combined_data():
     conn.close()
     return df
 
-# Cargar los datos combinados
+# Carregar os dados combinados
 combined_data = load_combined_data()
 
-# Mostrar datos
+# Mostrar os dados em um dataframe interativo
 st.dataframe(combined_data)
 
 # Gráfico combinado
