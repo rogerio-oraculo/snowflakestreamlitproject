@@ -2,3 +2,5 @@ streamlit
 snowflake-connector-python
 pandas
 plotly
+streamlit-folium
+snowflake-snowpark-python
