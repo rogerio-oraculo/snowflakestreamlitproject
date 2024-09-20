@@ -3,3 +3,7 @@ crimes_in_london_venv/
 
 # Ignorar a pasta incoming
 incoming/
+
+# Ignorar secrets.toml
+.streamlit/secrets.toml
+
