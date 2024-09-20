@@ -1,0 +1,5 @@
+# Ignorar a pasta virtualenv
+crimes_in_london_venv/
+
+# Ignorar a pasta incoming
+incoming/
