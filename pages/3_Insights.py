@@ -70,6 +70,6 @@ def paginate_data(df, page_size):
     return df.iloc[start_idx:end_idx]
 
 # Exibir a tabela paginada no final da página
-page_size = 10ss
+page_size = 10
 paginated_data = paginate_data(combined_data, page_size)
 st.dataframe(paginated_data, height=300)
