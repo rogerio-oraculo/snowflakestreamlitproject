@@ -1,6 +1,5 @@
 -- Tabela stop_and_search
 
--- 1. Criar a tabela apenas se ela não existir
 CREATE TABLE IF NOT EXISTS "CRIMES_IN_LONDON_DB"."CRIMES_IN_LONDON_SCHEMA"."table_stop_and_search" (
     type VARCHAR, 
     date TIMESTAMP_NTZ, 
@@ -19,7 +18,6 @@ CREATE TABLE IF NOT EXISTS "CRIMES_IN_LONDON_DB"."CRIMES_IN_LONDON_SCHEMA"."tabl
     removal_of_more_than_just_outer_clothing BOOLEAN
 );
 
--- 2. Criar o file format temporário, se ainda não existir
 CREATE OR REPLACE TEMP FILE FORMAT "CRIMES_IN_LONDON_DB"."CRIMES_IN_LONDON_SCHEMA"."temp_file_format_stop_and_search"
     TYPE = CSV
     SKIP_HEADER = 1
@@ -31,7 +29,6 @@ CREATE OR REPLACE TEMP FILE FORMAT "CRIMES_IN_LONDON_DB"."CRIMES_IN_LONDON_SCHEM
     TIME_FORMAT = AUTO
     TIMESTAMP_FORMAT = AUTO;
 
--- 3. Carregar os dados no formato append na tabela existente
 COPY INTO "CRIMES_IN_LONDON_DB"."CRIMES_IN_LONDON_SCHEMA"."table_stop_and_search" 
 FROM (
     SELECT 
@@ -54,11 +51,11 @@ FROM (
 ) 
 FILES = ('2024-07-city-of-london-stop-and-search.csv') -- Aqui você passa o nome do arquivo CSV como parâmetro
 FILE_FORMAT = '"CRIMES_IN_LONDON_DB"."CRIMES_IN_LONDON_SCHEMA"."temp_file_format_stop_and_search"' 
-ON_ERROR = CONTINUE; -- Usar CONTINUE para evitar a interrupção por erros
+ON_ERROR = CONTINUE;
 
 SELECT * FROM CRIMES_IN_LONDON_DB.CRIMES_IN_LONDON_SCHEMA."table_stop_and_search";
 
--- Criar table_street
+-- Tabela table_street
 
 CREATE TABLE IF NOT EXISTS "CRIMES_IN_LONDON_DB"."CRIMES_IN_LONDON_SCHEMA"."table_street" ( 
     crime_id VARCHAR, 
@@ -103,9 +100,9 @@ FROM (
         $12 AS context
 	FROM '@"CRIMES_IN_LONDON_DB"."CRIMES_IN_LONDON_SCHEMA"."CRIMES_IN_LONDON_STAGE"'
 ) 
-FILES = ('2024-07-city-of-london-street.csv') 
+FILES = ('2024-07-city-of-london-street.csv') -- Aqui você passa o nome do arquivo CSV como parâmetro
 FILE_FORMAT = '"CRIMES_IN_LONDON_DB"."CRIMES_IN_LONDON_SCHEMA"."temp_file_format_street"' 
-ON_ERROR = CONTINUE; -- Usar CONTINUE para evitar a interrupção por erros
+ON_ERROR = CONTINUE;
 
 SELECT * FROM CRIMES_IN_LONDON_DB.CRIMES_IN_LONDON_SCHEMA."table_street";
 
