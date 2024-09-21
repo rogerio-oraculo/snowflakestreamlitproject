@@ -22,13 +22,13 @@ def load_street_data():
 street_data = load_street_data()
 
 crime_types = st.sidebar.multiselect("Select Crime Type", options=street_data["CRIME_TYPE"].unique())
-regions = st.sidebar.multiselect("Select Region", options=street_data["REPORTED_BY"].unique())
+locations = st.sidebar.multiselect("Select Location", options=street_data["LOCATION"].unique())
 months = st.sidebar.multiselect("Select Month", options=street_data["MONTH"].unique())
 
 if crime_types:
     street_data = street_data[street_data["CRIME_TYPE"].isin(crime_types)]
-if regions:
-    street_data = street_data[street_data["REPORTED_BY"].isin(regions)]
+if locations:
+    street_data = street_data[street_data["LOCATION"].isin(locations)]
 if months:
     street_data = street_data[street_data["MONTH"].isin(months)]
 
@@ -64,6 +64,8 @@ def paginate_data(df, page_size):
     start_idx = (page_number - 1) * page_size
     end_idx = start_idx + page_size
     return df.iloc[start_idx:end_idx]
+
+street_data = street_data.drop(columns=["REPORTED_BY"])
 
 page_size = 10
 paginated_data = paginate_data(street_data, page_size)
