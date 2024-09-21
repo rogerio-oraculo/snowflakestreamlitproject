@@ -4,7 +4,6 @@ import argparse
 import streamlit as st
 
 def create_snowflake_connection():
-    """Cria uma conexão com o Snowflake usando as credenciais do secrets.toml."""
     return snowflake.connector.connect(
         user=st.secrets["snowflake"]["user"],
         password=st.secrets["snowflake"]["password"],
@@ -16,11 +15,9 @@ def create_snowflake_connection():
     )
 
 def upload_file_to_stage(conn, file_path, stage_name):
-    """Faz upload de um arquivo local para uma stage no Snowflake."""
     if not os.path.isfile(file_path):
         raise FileNotFoundError(f"O arquivo {file_path} não foi encontrado.")
     
-    # Comando PUT com AUTO_COMPRESS = FALSE
     upload_command = f"PUT file://{file_path} @{stage_name} AUTO_COMPRESS = FALSE"
     conn.cursor().execute(upload_command)
     
@@ -45,17 +42,13 @@ def main():
     
     args = parser.parse_args()
     
-    # Cria uma conexão com o Snowflake
     conn = create_snowflake_connection()
     
     try:
-        # Upload do arquivo para a stage
         upload_file_to_stage(conn, args.file, args.stage)
         
-        # Listar arquivos na stage
         list_stage_files(conn, args.stage)
     finally:
-        # Fechar a conexão
         conn.close()
 
 if __name__ == "__main__":
