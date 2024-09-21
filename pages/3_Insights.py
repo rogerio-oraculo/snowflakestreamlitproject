@@ -20,7 +20,7 @@ def get_snowflake_connection():
 def load_combined_data():
     conn = get_snowflake_connection()
     query = """
-    SELECT street.CRIME_TYPE, street.LATITUDE, street.LONGITUDE, stop.SELF_DEFINED_ETHNICITY, stop.OUTCOME, stop.DATE
+    SELECT street.CRIME_TYPE, street.LATITUDE, street.LONGITUDE, stop.OFFICER_DEFINED_ETHNICITY, stop.OUTCOME, stop.DATE
     FROM crimes_in_london_db.crimes_in_london_schema."table_street" AS street
     JOIN crimes_in_london_db.crimes_in_london_schema."table_stop_and_search" AS stop
     ON street.LATITUDE = stop.LATITUDE AND street.LONGITUDE = stop.LONGITUDE;
@@ -41,18 +41,26 @@ combined_data['TIME_OF_DAY'] = combined_data['DATE'].dt.hour.apply(
 )
 
 crime_types = st.sidebar.multiselect("Select Crime Type", options=combined_data["CRIME_TYPE"].unique())
-ethnicities = st.sidebar.multiselect("Select Ethnicity", options=combined_data["SELF_DEFINED_ETHNICITY"].unique())
+ethnicities = st.sidebar.multiselect("Select Officer Defined Ethnicity", options=combined_data["OFFICER_DEFINED_ETHNICITY"].unique())
 
 if crime_types:
     combined_data = combined_data[combined_data["CRIME_TYPE"].isin(crime_types)]
 if ethnicities:
-    combined_data = combined_data[combined_data["SELF_DEFINED_ETHNICITY"].isin(ethnicities)]
+    combined_data = combined_data[combined_data["OFFICER_DEFINED_ETHNICITY"].isin(ethnicities)]
 
 crime_time_fig = px.histogram(combined_data, x="TIME_OF_DAY", color="CRIME_TYPE", title="Crime Occurrences by Time of Day")
 st.plotly_chart(crime_time_fig)
 
-fig = px.scatter(combined_data, x="CRIME_TYPE", y="OUTCOME", color="SELF_DEFINED_ETHNICITY", title="Relationship Between Crimes and Ethnicity")
-st.plotly_chart(fig)
+scatter_plot = px.scatter(
+    combined_data,
+    x="CRIME_TYPE",
+    y="OUTCOME",
+    color="OFFICER_DEFINED_ETHNICITY",
+    title="Crimes by Type and Officer Defined Ethnicity (Scatter Plot)",
+    height=800
+)
+
+st.plotly_chart(scatter_plot)
 
 def paginate_data(df, page_size):
     page_number = st.number_input("Page number", min_value=1, max_value=(len(df) // page_size) + 1, step=1)
