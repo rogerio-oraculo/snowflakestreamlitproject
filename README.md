@@ -1,19 +1,22 @@
 # Crimes em Londres
 
-## Criar Ambiente Virtual
-````
-python3 -m venv crimes_in_london_venv
-````
-## Instalar conector Snowflake
-````
-pip3 install snowflake-connector-python
-````
-## Upload para a stage do snowflake
-````
-python3 upload_to_snowflake.py --file incoming/2024-07/2024-07-city-of-london-street.csv --stage CRIMES_IN_LONDON_STAGE
-python3 upload_to_snowflake.py --file incoming/2024-07/2024-07-city-of-london-stop-and-search.csv --stage CRIMES_IN_LONDON_STAGE
-````
-## Criar tabelas csom base nos arquivos da Stage
-(...)
+This project aims to assist those who plan to visit London or those who live in London. With this app, you can walk in the least risky areas to ensure your safety, avoiding places with higher security risks.
+
+# Preparando o Ambiente
+
+## Crie uma conta gratuita no Snowflake
+
+![Sign up](images/sign_up.png)
+
+## Crie um Database
+
+![Create Database](images/create_db_1.png)
+![Create Database](images/create_db_2.png)
+
+## Crie um Schema
+
+![Create Schema](images/create:schema.png)
+
+
 
 
