@@ -93,7 +93,7 @@ schema = "CRIMES_IN_LONDON_SCHEMA"
 
 > Por meio destas credenciais você poderá rodar sua aplicação acessando os dados das tabelas que serão criadas com base nos arquivos .csv na stage.
 
-## Criando  as tabelas *table_stop_and_search* e *table_street*
+## Criando  as tabelas *table_stop_and_search* e *table_street*, definindo o fornato e carregando dados
 
 Use o script [queries_load.sql](https://github.com/rogerioelquinto/crimes_in_london_snowflake_streamlit/blob/main/queries_load.sql) para criar as tabelas.
 
