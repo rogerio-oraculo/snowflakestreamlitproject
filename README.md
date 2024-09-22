@@ -62,7 +62,7 @@ ls incoming/2024-07
 2024-07-city-of-london-stop-and-search.csv  2024-07-city-of-london-street.csv
 ````
 
-## Faça o upload de quantos arquivos desejar para a Stage **CRIMES_IN_LONDON_STAGE**
+## Faça o upload de quantos arquivos desejar para a Stage
 
 ````
 python3 upload_to_snowflake.py --file incoming/7fee6b59cb6868019892fbd7165bed34a700e99e/2024-07/2024-07-city-of-london-street.csv --stage CRIMES_IN_LONDON_STAGE 
@@ -77,5 +77,19 @@ python3 upload_to_snowflake.py --file incoming/7fee6b59cb6868019892fbd7165bed34a
 ## Verique os arquivos carregados na Stage
 
 ![Stage files uploaded](images/stage_files_uploaded.png)
+
+## Configure as credenciais para .streamlit/secrets.toml
+
+````
+[snowflake]
+account = "PVXXXNRR-RXXXX3171"
+user = "rogerioelquinto"
+password = "***********"
+role = "ACCOUNTADMIN"
+warehouse = "COMPUTE_WH"
+database = "CRIMES_IN_LONDON_DB"
+schema = "CRIMES_IN_LONDON_SCHEMA"
+````
+
 
 
