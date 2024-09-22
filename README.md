@@ -106,13 +106,24 @@ Use o script [queries_load.sql](https://github.com/rogerioelquinto/crimes_in_lon
 ![SQL Worksheet](images/sql_worksheet_3.png)
 ![SQL Worksheet](images/sql_worksheet_4.png)
 
-Altere a variável **FILES** para o nome dos arquivos que você carregou na Stage:
+Altere a variável **FILES** para o nome dos arquivos que você carregou na Stage e execute o ultimo bloco (**COPY INTO...**) para os demais arquivos que deseja carregar:
 ````
 (...)
 FILES = ('2024-07-city-of-london-stop-and-search.csv') -- Aqui você passa o nome do arquivo CSV como parâmetro
 (...)
 FILES = ('2024-07-city-of-london-street.csv') -- Aqui você passa o nome do arquivo CSV como parâmetro
 ````
+
+## Executando a aplicação 
+
+````
+streamlit run main.py
+````
+
+![Streamlit App](images/streamlit_app_1.png)
+![Streamlit App](images/streamlit_app_2.png)
+![Streamlit App](images/streamlit_app_3.png)
+
 
 
 
