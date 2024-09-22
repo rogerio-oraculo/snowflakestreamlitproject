@@ -53,8 +53,6 @@ FILES = ('2024-07-city-of-london-stop-and-search.csv') -- Aqui você passa o nom
 FILE_FORMAT = '"CRIMES_IN_LONDON_DB"."CRIMES_IN_LONDON_SCHEMA"."temp_file_format_stop_and_search"' 
 ON_ERROR = CONTINUE;
 
-SELECT * FROM CRIMES_IN_LONDON_DB.CRIMES_IN_LONDON_SCHEMA."table_stop_and_search";
-
 -- Tabela table_street
 
 CREATE TABLE IF NOT EXISTS "CRIMES_IN_LONDON_DB"."CRIMES_IN_LONDON_SCHEMA"."table_street" ( 
@@ -103,6 +101,3 @@ FROM (
 FILES = ('2024-07-city-of-london-street.csv') -- Aqui você passa o nome do arquivo CSV como parâmetro
 FILE_FORMAT = '"CRIMES_IN_LONDON_DB"."CRIMES_IN_LONDON_SCHEMA"."temp_file_format_street"' 
 ON_ERROR = CONTINUE;
-
-SELECT * FROM CRIMES_IN_LONDON_DB.CRIMES_IN_LONDON_SCHEMA."table_street";
-
