@@ -35,7 +35,7 @@ if genders:
 if ethnicities:
     stop_search_data = stop_search_data[stop_search_data["OFFICER_DEFINED_ETHNICITY"].isin(ethnicities)]
 
-fig = px.histogram(stop_search_data, x="GENDER", color="OUTCOME", barmode="group")
+fig = px.histogram(stop_search_data, x="GENDER", color="OUTCOME", barmode="group", title="Outcome by Gender")
 st.plotly_chart(fig)
 
 def paginate_data(df, page_size):
