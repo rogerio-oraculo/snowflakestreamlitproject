@@ -20,6 +20,7 @@ Este projeto visa auxiliar quem pretende visitar Londres ou quem mora em Londres
 ## Crie uma Stage
 
 ![Create Stage](images/create_stage_1.png)
+> Em Stage, selectione Snowflake Managed
 ![Create Stage](images/create_stage_2.png)
 
 
