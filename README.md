@@ -24,6 +24,17 @@ Este projeto visa auxiliar quem pretende visitar Londres ou quem mora em Londres
 
 ![Create Stage](images/create_stage_2.png)
 
+## Faça o clone do projeto
+
+````
+git clone https://github.com/rogerioelquinto/crimes_in_london_snowflake_streamlit.git
+cd crimes_in_london_snowflake_streamlit
+pip install -r requirements.txt
+````
+
+
+
+
 
 
 
