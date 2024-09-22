@@ -56,7 +56,7 @@ scatter_plot = px.scatter(
     x="CRIME_TYPE",
     y="OUTCOME",
     color="OFFICER_DEFINED_ETHNICITY",
-    title="Crimes by Type and Officer Defined Ethnicity (Scatter Plot)",
+    title="Crimes by Type and Officer Defined Ethnicity",
     height=800
 )
 
