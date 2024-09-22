@@ -78,7 +78,7 @@ python3 upload_to_snowflake.py --file incoming/7fee6b59cb6868019892fbd7165bed34a
 
 ![Stage files uploaded](images/stage_files_uploaded.png)
 
-## Configure as credenciais para .streamlit/secrets.toml
+## Configure as credenciais no arquivo .streamlit/secrets.toml
 
 ````
 [snowflake]
@@ -90,6 +90,9 @@ warehouse = "COMPUTE_WH"
 database = "CRIMES_IN_LONDON_DB"
 schema = "CRIMES_IN_LONDON_SCHEMA"
 ````
+
+> Por meio destas credenciais você poderá rodar sua aplicação acessando os dados das tabelas que serão criadas com base nos arquivos .csv na stage.
+
 
 
 
