@@ -98,9 +98,22 @@ schema = "CRIMES_IN_LONDON_SCHEMA"
 Use o script [queries_load.sql](https://github.com/rogerioelquinto/crimes_in_london_snowflake_streamlit/blob/main/queries_load.sql) para criar as tabelas.
 
 ![SQL Worksheet](images/sql_worksheet_1.png)
+> Selecione **SQL Worksheet** para executar as instruções SQL do arquivo **queries_load.sql**
+
 ![SQL Worksheet](images/sql_worksheet_2.png)
+> Para executar o bloco de código selecionado, utilize **CTRL+ENTER**
+
 ![SQL Worksheet](images/sql_worksheet_3.png)
 ![SQL Worksheet](images/sql_worksheet_4.png)
+
+Altere a variável **FILES** para o nome dos arquivos que você carregou na Stage:
+````
+(...)
+FILES = ('2024-07-city-of-london-stop-and-search.csv') -- Aqui você passa o nome do arquivo CSV como parâmetro
+(...)
+FILES = ('2024-07-city-of-london-street.csv') -- Aqui você passa o nome do arquivo CSV como parâmetro
+````
+
 
 
 
