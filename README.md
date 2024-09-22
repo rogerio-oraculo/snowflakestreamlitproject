@@ -1,6 +1,6 @@
 # Crimes em Londres
 
-This project aims to assist those who plan to visit London or those who live in London. With this app, you can walk in the least risky areas to ensure your safety, avoiding places with higher security risks.
+Este projeto visa auxiliar quem pretende visitar Londres ou quem mora em Londres. Com este aplicativo, você pode caminhar pelas áreas menos arriscadas para garantir sua segurança, evitando locais com maiores riscos de segurança.
 
 # Preparando o Ambiente
 
@@ -15,7 +15,12 @@ This project aims to assist those who plan to visit London or those who live in 
 
 ## Crie um Schema
 
-![Create Schema](images/create:schema.png)
+![Create Schema](images/create_schema.png)
+
+## Crie uma Stage
+
+![Create Stage](images/create_stage_1.png)
+![Create Stage](images/create_stage_2.png)
 
 
 
