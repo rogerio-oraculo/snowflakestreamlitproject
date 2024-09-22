@@ -82,7 +82,7 @@ python3 upload_to_snowflake.py --file incoming/7fee6b59cb6868019892fbd7165bed34a
 
 ````
 [snowflake]
-account = "PVXXXNRR-RXXXX3171"
+account = "PVXXXNRR-RXXXX3375"
 user = "nome_do_seu_usuario"
 password = "***********"
 role = "ACCOUNTADMIN"
