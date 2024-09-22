@@ -24,7 +24,6 @@ def upload_file_to_stage(conn, file_path, stage_name):
     print(f"Arquivo {file_path} carregado com sucesso para a stage @{stage_name}.")
 
 def list_stage_files(conn, stage_name):
-    """Lista os arquivos presentes na stage."""
     cursor = conn.cursor()
     cursor.execute(f"LIST @{stage_name}")
     files = cursor.fetchall()
