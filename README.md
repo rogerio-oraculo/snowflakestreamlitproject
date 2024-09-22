@@ -40,6 +40,18 @@ Vá no link: [https://data.police.uk/data/](https://data.police.uk/data/)
 ![Data Police](images/data_police_uk_london_2.png)
 ![Data Police](images/data_police_uk_london_3.png)
 
+Salve o arquivo .zip dentro da raiz do projeto: **crimes_in_london_snowflake_streamlit**
+
+Descompacte e renomeie o arquivo:
+
+````
+unzip 7fee6b59cb6868019892fbd7165bed34a700e99e
+mv 7fee6b59cb6868019892fbd7165bed34a700e99e incoming
+````
+> Lembrando que o seu arquivo terá um nome diferente de **7fee6b59cb6868019892fbd7165bed34a700e99e**
+
+
+
 
 
 
