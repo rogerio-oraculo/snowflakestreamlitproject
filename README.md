@@ -32,6 +32,14 @@ cd crimes_in_london_snowflake_streamlit
 pip install -r requirements.txt
 ````
 
+## Baixe a base de crimes
+
+Vá no link: [https://data.police.uk/data/](https://data.police.uk/data/)
+
+![Data Police](images/data_police_uk_london_1.png)
+![Data Police](images/data_police_uk_london_2.png)
+![Data Police](images/data_police_uk_london_3.png)
+
 
 
 
