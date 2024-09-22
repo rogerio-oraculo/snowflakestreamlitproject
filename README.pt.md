@@ -1,30 +1,30 @@
-# Crimes in London
+# Crimes em Londres
 
-This project aims to assist those who plan to visit London or those who live in London. With this app, you can walk in the least risky areas to ensure your safety, avoiding places with higher security risks.
+Este projeto visa auxiliar quem pretende visitar Londres ou quem mora em Londres. Com este aplicativo, você pode caminhar pelas áreas menos arriscadas para garantir sua segurança, evitando locais com maiores riscos de segurança.
 
-# Setting up the Environment
+# Preparando o Ambiente
 
-## Create a Free Snowflake Account
+## Crie uma conta gratuita no Snowflake
 
 ![Sign up](images/sign_up.png)
 
-## Create a Database
+## Crie um Database
 
 ![Create Database](images/create_db_1.png)
 ![Create Database](images/create_db_2.png)
 
-## Create a Schema
+## Crie um Schema
 
 ![Create Schema](images/create_schema.png)
 
-## Create a Stage
+## Crie uma Stage
 
 ![Create Stage](images/create_stage_1.png)
-> In **Stage**, select **Snowflake Managed**
+> Em **Stage**, selecione **Snowflake Managed**
 
 ![Create Stage](images/create_stage_2.png)
 
-## Clone the Project
+## Faça o clone do projeto
 
 ````
 git clone https://github.com/rogerioelquinto/crimes_in_london_snowflake_streamlit.git
@@ -32,25 +32,25 @@ cd crimes_in_london_snowflake_streamlit
 pip install -r requirements.txt
 ````
 
-## Download the Crime Dataset
+## Baixe a base de crimes
 
-Go to the link: [https://data.police.uk/data/](https://data.police.uk/data/)
+Vá no link: [https://data.police.uk/data/](https://data.police.uk/data/)
 
 ![Data Police](images/data_police_uk_london_1.png)
 ![Data Police](images/data_police_uk_london_2.png)
 ![Data Police](images/data_police_uk_london_3.png)
 
-Save the .zip file in the root folder of the project: **crimes_in_london_snowflake_streamlit**
+Salve o arquivo .zip dentro da raiz do projeto: **crimes_in_london_snowflake_streamlit**
 
-Unzip and rename the file:
+Descompacte e renomeie o arquivo:
 
 ````
 unzip 7fee6b59cb6868019892fbd7165bed34a700e99e
 mv 7fee6b59cb6868019892fbd7165bed34a700e99e incoming
 ````
-> Note that your file will have a different name than **7fee6b59cb6868019892fbd7165bed34a700e99e**
+> Lembrando que o seu arquivo terá um nome diferente de **7fee6b59cb6868019892fbd7165bed34a700e99e**
 
-The directory will contain the following content:
+O diretório (pasta) terá o seguinte conteúdo:
 
 ````
 ls incoming/
@@ -62,7 +62,7 @@ ls incoming/2024-07
 2024-07-city-of-london-stop-and-search.csv  2024-07-city-of-london-street.csv
 ````
 
-## Upload Files to the Stage
+## Faça o upload de quantos arquivos desejar para a Stage
 
 ````
 python3 upload_to_snowflake.py --file incoming/7fee6b59cb6868019892fbd7165bed34a700e99e/2024-07/2024-07-city-of-london-street.csv --stage CRIMES_IN_LONDON_STAGE 
@@ -74,16 +74,16 @@ python3 upload_to_snowflake.py --file incoming/7fee6b59cb6868019892fbd7165bed34a
 python3 upload_to_snowflake.py --file incoming/7fee6b59cb6868019892fbd7165bed34a700e99e/2024-05/2024-05-city-of-london-stop-and-search.csv --stage CRIMES_IN_LONDON_STAGE 
 ````
 
-## Verify the Uploaded Files in the Stage
+## Verique os arquivos carregados na Stage
 
 ![Stage files uploaded](images/stage_files_uploaded.png)
 
-## Configure the Credentials in the *.streamlit/secrets.toml* File
+## Configure as credenciais no arquivo *.streamlit/secrets.toml*
 
 ````
 [snowflake]
 account = "PVXXXNRR-RXXXX3375"
-user = "your_username"
+user = "nome_do_seu_usuario"
 password = "***********"
 role = "ACCOUNTADMIN"
 warehouse = "COMPUTE_WH"
@@ -91,30 +91,30 @@ database = "CRIMES_IN_LONDON_DB"
 schema = "CRIMES_IN_LONDON_SCHEMA"
 ````
 
-> These credentials allow you to run your application and access the data from the tables created from the CSV files uploaded to the stage.
+> Por meio destas credenciais você poderá rodar sua aplicação acessando os dados das tabelas que serão criadas com base nos arquivos .csv na stage.
 
-## Creating the *table_stop_and_search* and *table_street* Tables, Defining Format, and Loading Data
+## Criando  as tabelas *table_stop_and_search* e *table_street*, definindo o formato e carregando dados
 
-Use the [queries_load.sql](https://github.com/rogerioelquinto/crimes_in_london_snowflake_streamlit/blob/main/queries_load.sql) script to create the tables.
+Use o script [queries_load.sql](https://github.com/rogerioelquinto/crimes_in_london_snowflake_streamlit/blob/main/queries_load.sql) para criar as tabelas.
 
 ![SQL Worksheet](images/sql_worksheet_1.png)
-> Select **SQL Worksheet** to run the SQL commands from the **queries_load.sql** file
+> Selecione **SQL Worksheet** para executar as instruções SQL do arquivo **queries_load.sql**
 
 ![SQL Worksheet](images/sql_worksheet_2.png)
-> To run the selected code block, press **CTRL+ENTER**
+> Para executar o bloco de código selecionado, utilize **CTRL+ENTER**
 
 ![SQL Worksheet](images/sql_worksheet_3.png)
 ![SQL Worksheet](images/sql_worksheet_4.png)
 
-Change the **FILES** variable to match the name of the files you uploaded to the Stage, and run the last block (**COPY INTO**...) for the remaining files you want to load:
+Altere a variável **FILES** para o nome dos arquivos que você carregou na Stage e execute o ultimo bloco (**COPY INTO...**) para os demais arquivos que deseja carregar:
 ````
 (...)
-FILES = ('2024-07-city-of-london-stop-and-search.csv') -- Pass the CSV file name as a parameter here
+FILES = ('2024-07-city-of-london-stop-and-search.csv') -- Aqui você passa o nome do arquivo CSV como parâmetro
 (...)
-FILES = ('2024-07-city-of-london-street.csv') -- Pass the CSV file name as a parameter here
+FILES = ('2024-07-city-of-london-street.csv') -- Aqui você passa o nome do arquivo CSV como parâmetro
 ````
 
-## Running the Application 
+## Executando a aplicação 
 
 ````
 streamlit run main.py
