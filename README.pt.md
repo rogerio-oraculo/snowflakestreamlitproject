@@ -65,13 +65,13 @@ ls incoming/2024-07
 ## Faça o upload de quantos arquivos desejar para a Stage
 
 ````
-python3 upload_to_snowflake.py --file incoming/7fee6b59cb6868019892fbd7165bed34a700e99e/2024-07/2024-07-city-of-london-street.csv --stage CRIMES_IN_LONDON_STAGE 
-python3 upload_to_snowflake.py --file incoming/7fee6b59cb6868019892fbd7165bed34a700e99e/2024-06/2024-06-city-of-london-street.csv --stage CRIMES_IN_LONDON_STAGE 
-python3 upload_to_snowflake.py --file incoming/7fee6b59cb6868019892fbd7165bed34a700e99e/2024-05/2024-05-city-of-london-street.csv --stage CRIMES_IN_LONDON_STAGE
+python3 upload_to_snowflake.py --file incoming/2024-07/2024-07-city-of-london-street.csv --stage CRIMES_IN_LONDON_STAGE 
+python3 upload_to_snowflake.py --file incoming/2024-06/2024-06-city-of-london-street.csv --stage CRIMES_IN_LONDON_STAGE 
+python3 upload_to_snowflake.py --file incoming/2024-05/2024-05-city-of-london-street.csv --stage CRIMES_IN_LONDON_STAGE
 
-python3 upload_to_snowflake.py --file incoming/7fee6b59cb6868019892fbd7165bed34a700e99e/2024-07/2024-07-city-of-london-stop-and-search.csv --stage CRIMES_IN_LONDON_STAGE 
-python3 upload_to_snowflake.py --file incoming/7fee6b59cb6868019892fbd7165bed34a700e99e/2024-06/2024-06-city-of-london-stop-and-search.csv --stage CRIMES_IN_LONDON_STAGE 
-python3 upload_to_snowflake.py --file incoming/7fee6b59cb6868019892fbd7165bed34a700e99e/2024-05/2024-05-city-of-london-stop-and-search.csv --stage CRIMES_IN_LONDON_STAGE 
+python3 upload_to_snowflake.py --file incoming/2024-07/2024-07-city-of-london-stop-and-search.csv --stage CRIMES_IN_LONDON_STAGE 
+python3 upload_to_snowflake.py --file incoming/2024-06/2024-06-city-of-london-stop-and-search.csv --stage CRIMES_IN_LONDON_STAGE 
+python3 upload_to_snowflake.py --file incoming/2024-05/2024-05-city-of-london-stop-and-search.csv --stage CRIMES_IN_LONDON_STAGE
 ````
 
 ## Verique os arquivos carregados na Stage
