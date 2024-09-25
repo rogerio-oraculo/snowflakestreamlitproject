@@ -4,7 +4,6 @@ import folium
 from folium.plugins import MarkerCluster
 from streamlit_folium import folium_static
 from snowflake.snowpark import Session
-from snowflake.snowpark.functions import col
 
 st.title("Street Crime Analysis in London")
 
